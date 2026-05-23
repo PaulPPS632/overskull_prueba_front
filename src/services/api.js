@@ -4,12 +4,17 @@ import { createToastInterface } from 'vue-toastification'
 const toast = createToastInterface()
 
 const api = axios.create({
-  baseURL: 'http://localhost:8080/api',
+  baseURL: 'http://localhost:8000/api',
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',
   },
+})
+
+api.interceptors.request.use((config) => {
+  config.metadata = { startTime: Date.now() }
+  return config
 })
 
 const getErrorMessage = (error) => {

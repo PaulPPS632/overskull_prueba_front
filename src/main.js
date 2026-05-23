@@ -1,5 +1,19 @@
 import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+import Toast from 'vue-toastification'
+import 'vue-toastification/dist/index.css'
 import './style.css'
 import App from './App.vue'
+import router from './router'
 
-createApp(App).mount('#app')
+const app = createApp(App)
+
+app.use(createPinia())
+app.use(router)
+app.use(Toast, {
+  timeout: 3500,
+  position: 'top-right',
+  hideProgressBar: false,
+})
+
+app.mount('#app')
